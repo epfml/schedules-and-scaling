@@ -8,7 +8,7 @@ This is the codebase accompanying the paper [*Scaling Laws and Compute-Optimal T
   <img src="assets/cos_vs_cooldown.png" alt="Cosine vs. Cooldown Schedules" style="width:70%">
 </p>
 
-**Figure:** Whereas the cosine learning rate follows a slow annealing, the alternative cooldown is characterized by a sharp decrease (the cooldown) towards the end of training. The cooldown phase initiates a sharp decrease in loss to match cosine; the training perplexity follows the same behavior.
+**Figure:** Whereas the cosine learning rate follows a slow annealing, the alternative schedule of constant LR + cooldown is characterized by a fast drop towards the end of training. This cooldown phase initiates a sharp decrease in loss to match cosine; the training perplexity follows the same behavior.
 
 <p align="center">
   <img align="center" src="assets/scaling_curves.png" alt="Loss Curve Envelopes" style="width:45%">
