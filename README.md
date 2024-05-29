@@ -4,18 +4,19 @@ This is the codebase accompanying the paper [*Scaling Laws and Compute-Optimal T
 **Abstract:**
 > Scale has become a main ingredient in obtaining strong machine learning models. As a result, understanding a model's scaling properties is key to effectively designing both the right training setup as well as future generations of architectures. In this work, we argue that scale and training research has been needlessly complex due to reliance on the cosine schedule, which prevents training across different lengths for the same model size. We investigate the training behavior of a direct alternative - constant learning rate and cooldowns - and find that it scales predictably and reliably similar to cosine. Additionally, we show that stochastic weight averaging yields improved performance along the training trajectory, without additional training costs, across different scales. Importantly, with these findings we demonstrate that scaling experiments can be performed with significantly reduced compute and GPU hours by utilizing fewer but reusable training runs.
 
-<figure>
-  <img src="assets/cos_vs_cooldown.png" alt="Cosine vs. Cooldown Schedules" style="width:70%; margin: auto;">
-  <figcaption>Figure: Whereas the cosine learning rate follows a slow annealing, the alternative cooldown is characterized by a sharp decrease (the cooldown) towards the end of training. The cooldown phase initiates a sharp decrease in loss to match cosine; the training perplexity follows the same behavior.</figcaption>
-</figure>
+<p align="center">
+  <img src="assets/cos_vs_cooldown.png" alt="Cosine vs. Cooldown Schedules" style="width:70%">
+</p>
 
-<figure>
+**Figure:** Whereas the cosine learning rate follows a slow annealing, the alternative cooldown is characterized by a sharp decrease (the cooldown) towards the end of training. The cooldown phase initiates a sharp decrease in loss to match cosine; the training perplexity follows the same behavior.
+
+<p align="center">
   <img align="center" src="assets/scaling_curves.png" alt="Loss Curve Envelopes" style="width:45%">
   <img align="center" src="assets/savings.png" vertical-align="center" alt="Loss Curve Envelopes" style="width:51%">
-  
-  <figcaption>Figure: The cooldown schedule allows to perform scaling law experiments for a fraction of the compute. Instead of having to train from scratch (cosine), we launch one long run and perform cooldowns from intermediate checkpoints after training.</figcaption>
+</p>
 
-</figure>
+**Figure:** The cooldown schedule allows to perform scaling law experiments for a fraction of the compute. Instead of having to train from scratch (cosine), we launch one long run and perform cooldowns from intermediate checkpoints after training.
+
 
 ## Quickstart 
 
