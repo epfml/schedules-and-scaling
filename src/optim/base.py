@@ -140,6 +140,7 @@ def train(
                 type_ctx,
                 distributed_backend,
                 cfg,
+                opt,
                 full_eval=(curr_iter in cfg.full_eval_at),
             )
 
@@ -188,6 +189,8 @@ def train(
 
         if cfg.grad_clip != 0.0:
             torch.nn.utils.clip_grad_norm_(model.parameters(), cfg.grad_clip)
+        if cfg.opt == "SFAdamW":
+            opt.train()
         opt.step()
         scheduler.step()
         opt.zero_grad(set_to_none=True)
@@ -236,6 +239,7 @@ def eval_and_log(
     type_ctx,
     distributed_backend,
     cfg,
+    opt,
     full_eval=False,
 ):
     if not distributed_backend.is_master_process():
@@ -243,6 +247,8 @@ def eval_and_log(
         return
 
     model.eval()
+    if cfg.opt == "SFAdamW":
+        opt.eval()
 
     if curr_iter == cfg.iterations or full_eval:
         max_num_batches = val_reader.num_batches()
