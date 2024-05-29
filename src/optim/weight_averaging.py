@@ -177,8 +177,6 @@ def eval_wa(
                     else cfg.eval_batches
                 ),
                 ctx=type_ctx,
-                moe=cfg.moe,
-                get_router_logits=False,
                 cfg=cfg,
             )
 
@@ -303,8 +301,6 @@ def eval_ema(
             else cfg.eval_batches
         ),
         ctx=type_ctx,
-        moe=cfg.moe,
-        get_router_logits=False,
         cfg=cfg,
     )
 
