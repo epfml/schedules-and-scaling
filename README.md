@@ -53,7 +53,7 @@ Moreover, the argument `wa-sweep-horizon` helps to automatically sweep the horiz
 ## FLOPS helpers
 The [`flops.ipynb`](flops.ipynb) provides a few helpers and functionalities for FLOPS computations of transformer configurations.
 
-# Contact
+# Contact & Reference
 Please do not hesitate to reach out to us if you have questions!
 
 In order to cite this work:
