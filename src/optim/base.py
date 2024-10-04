@@ -33,7 +33,7 @@ def train(
     distributed_backend,
     cfg,
 ):
-    non_compiled_model = model
+    not_compiled_model = model
     if cfg.compile:
         print(f"Compiling model ...")
         model = torch.compile(model)
@@ -73,7 +73,7 @@ def train(
         # Otherwise, the first avg will not be correctly computed, with a bias
         # towards the first sample and missing values for earlier iterations.
         weight_averager = WeightAverager(
-            non_compiled_model,
+            not_compiled_model,
             horizon=cfg.wa_horizon,
             interval=cfg.wa_interval,
             save_dir=None if cfg.wa_use_temp_dir else exp_dir / "avgs",
@@ -86,7 +86,7 @@ def train(
 
     if cfg.exponential_moving_average:
         ema = ExponentialWeightAverager(
-            non_compiled_model,
+            not_compiled_model,
             interval=cfg.ema_interval,
             decay=cfg.ema_decay,
             warmup=cfg.warmup_steps if cfg.ema_after_warmup else 0,
@@ -152,7 +152,7 @@ def train(
             if curr_iter > cfg.wa_interval and cfg.weight_average:
                 eval_wa(
                     curr_iter,
-                    model,
+                    not_compiled_model,
                     weight_averager,
                     val_reader,
                     type_ctx,
@@ -163,7 +163,7 @@ def train(
             if cfg.exponential_moving_average:
                 eval_ema(
                     curr_iter,
-                    model,
+                    not_compiled_model,
                     ema,
                     val_reader,
                     type_ctx,
@@ -200,9 +200,9 @@ def train(
         scheduler.step()
         opt.zero_grad(set_to_none=True)
         if cfg.weight_average:
-            weight_averager.step(non_compiled_model, distributed_backend.is_master_process())
+            weight_averager.step(not_compiled_model, distributed_backend.is_master_process())
         if cfg.exponential_moving_average:
-            ema.step(non_compiled_model, distributed_backend.is_master_process())
+            ema.step(not_compiled_model, distributed_backend.is_master_process())
         dt = (time.perf_counter_ns() - t_start) / 1e9
 
         curr_iter += 1
