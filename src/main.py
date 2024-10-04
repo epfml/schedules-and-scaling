@@ -242,8 +242,7 @@ def get_data_readers(args, verbose=True):
         seed=args.data_seed,
         with_replacement=False,
         auto_shard=True,
-        # keep_in_ram=args.data_in_ram,
-        keep_in_ram=True,
+        keep_in_ram=args.data_in_ram,
     )
     val_reader = DataReader(
         data_src=data_srcs["val"],
@@ -252,8 +251,7 @@ def get_data_readers(args, verbose=True):
         seed=args.data_seed,
         with_replacement=False,
         auto_shard=False,  # NOTE Identical Per Rank
-        # keep_in_ram=args.data_in_ram,
-        keep_in_ram=True,
+        keep_in_ram=args.data_in_ram,
     )
 
     if verbose:
