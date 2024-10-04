@@ -155,10 +155,6 @@ def main(args):
     elif distributed_backend.is_master_process():
         exp_dir.mkdir(parents=True, exist_ok=True)
 
-    if args.compile:
-        print(f"Compiling model ...")
-        model = torch.compile(model)
-
     stats = train(
         model=model,
         opt=opt,
