@@ -103,6 +103,10 @@ class WeightAverager:
 
 def map_and_load_state_dict(model, state_dict):
     for key, m_val in model.state_dict().items():
+        for alias in (f'_orig_mod.{key}', f'_orig_mod.module.{key}'):  # handle compiled / nested model
+            if key not in state_dict and alias in state_dict:
+                key = alias
+                break
         s_val = state_dict[key]
         m_val.copy_(s_val.to(device=m_val.device, dtype=m_val.dtype))
 
@@ -125,7 +129,7 @@ def eval_wa(
         return
     if not cfg.wa_sweep_horizon:
         val_reader.set_step(0)
-        val_acc, val_loss, val_perplexity, _, _ = eval(
+        val_acc, val_loss, val_perplexity = eval(
             weight_averager.get_latest_like(model).eval(),
             val_reader,
             cfg.device,
@@ -167,7 +171,7 @@ def eval_wa(
         ):
             avg_model.eval()
             val_reader.set_step(0)
-            _, val_loss, _, _, _ = eval(
+            _, val_loss, _ = eval(
                 avg_model,
                 val_reader,
                 cfg.device,
@@ -291,7 +295,7 @@ def eval_ema(
         return
 
     val_reader.set_step(0)
-    val_acc, val_loss, val_perplexity, _, _ = eval(
+    val_acc, val_loss, val_perplexity = eval(
         ema.get_latest_like(model).eval(),
         val_reader,
         cfg.device,
