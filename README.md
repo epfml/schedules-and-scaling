@@ -59,16 +59,11 @@ Please do not hesitate to reach out to us if you have questions!
 In order to cite this work:
 ```
 @article{hagele2024scaling,
-  Author        = {Alexander Hägele and Elie Bakouch and Atli Kosson and Loubna Ben Allal and Leandro Von Werra and Martin Jaggi},
-  Title         = {Scaling Laws and Compute-Optimal Training Beyond Fixed Training
-    Durations},
-  Eprint        = {2405.18392v1},
-  ArchivePrefix = {arXiv},
-  PrimaryClass  = {cs.LG},
-  Year          = {2024},
-  Month         = {May},
-  Url           = {http://arxiv.org/abs/2405.18392v1},
-  File          = {2405.18392v1.pdf}
+  author  = {Alexander H\"agele and Elie Bakouch and Atli Kosson and Loubna Ben Allal and Leandro Von Werra and Martin Jaggi},
+  title   = {{Scaling Laws and Compute-Optimal Training Beyond Fixed Training Durations}},
+  year    = {2024},
+  journal = {Advances in Neural Information Processing Systems},
+  url     = {http://arxiv.org/abs/2405.18392}
 }
 ```
 
